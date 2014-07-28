@@ -113,7 +113,7 @@ artifactory {
         repoKey = 'repo'
     }
 }
-
+*/
 class Version {
     String originalVersion
     String thisVersion
@@ -138,10 +138,7 @@ class Version {
         format.setCalendar(Calendar.getInstance(TimeZone.getTimeZone('UTC')));
         return format.format(buildTime)
     }
-
     String toString() {
         thisVersion
     }
 }
-
-*/
