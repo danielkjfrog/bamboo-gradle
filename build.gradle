@@ -50,7 +50,7 @@ def javaProjects() {
 }
 
 allprojects {
-    apply plugin: 'com.jfrog.artifactory-upload'
+    //apply plugin: 'com.jfrog.artifactory-upload'
     group = 'org.jfrog.test.gradle.publish'
     version = globalVersion
     status = version.status
@@ -81,6 +81,7 @@ configure(javaProjects()) {
     }
 }
 
+/*
 artifactoryPublish.skip = true
 
 artifactory {
@@ -101,22 +102,6 @@ artifactory {
             }
         }
         defaults {
-	        //This closure defines defaults for all 'artifactoryPublish' tasks of all projects the plugin is applied to
-	        publishConfigs ('a','b','foo')                                 //Optional list of configurations (names or objects) to publish.
-	                                                                       //The 'archives' configuration is used if it exists and no configuration is specified
-	        //mavenDescriptor = '/home/froggy/projects/proj-a/fly-1.0.pom'   //Optional alternative path for a POM to be published (can be relative to project baseDir)
-	        //ivyDescriptor = 'fly-1.0-ivy.xml'                              //Optional alternative path for an ivy file to be published (can be relative to project baseDir)
-	        properties = ['qa.level': 'basic', 'q.os': 'win32, deb, osx']  //Optional map of properties to attach to all published artifacts
-	        /*
-	        The properties closure in the "defaults" task uses the following syntax:
-	        properties {
-	            configuration 'group:module:version:classifier@type', key1:'value1', key2:'value2', ...
-	        }
-	        configuration: A configuration that is a valid name of a configuration of the project. You can use all to apply the properties to all configurations.
-	        group:module:version:classifier@type: An artifact specification filter for matching the artifacts to which properties should be attached. The filter may contain wildcards: * for all characters  
-	        or ? for a single character.
-	        key:'value': A list of key/value(s) properties that are attached to to the published artifacts matching the filter.
-	        */
 
 	        publishBuildInfo = true   //Publish build-info to Artifactory (true by default)
 	        publishArtifacts = true   //Publish artifacts to Artifactory (true by default)
@@ -158,3 +143,5 @@ class Version {
         thisVersion
     }
 }
+
+*/
