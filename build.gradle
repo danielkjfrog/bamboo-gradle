@@ -84,24 +84,6 @@ configure(javaProjects()) {
 project('api') {
     apply plugin: 'ivy-publish'
 
-    publishing {
-        publications {
-            ivyJava(IvyPublication) {
-                from components.java
-                artifact(file("$rootDir/settings.gradle")) {
-                    name "gradle-settings"
-                    extension "txt"
-                    type "text"
-                }
-		// The config below will add a extra attribute to the ivy.xml
-		// See http://ant.apache.org/ivy/history/latest-milestone/concept.html#extra
-		descriptor.withXml {
-		    asNode().info[0].attributes().put('e:architecture', 'amd64')
-		}
-            }
-        }
-    }
-
     artifactoryPublish {
         publications(publishing.publications.ivyJava)
         properties {
