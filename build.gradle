@@ -130,17 +130,32 @@ artifactory {
             }
         }
         defaults {
-            //publishIvy & publishPom are true by default
-            publishArtifacts = true
-            publications('mavenJava')
-            properties = ['qa.level': 'basic']
-            properties {
-                archives 'org.jfrog:*:*:*@*', key1: 'val1 only on jars', key2: 'val2 only on jars'
-                all 'org.jfrog:shared:1.?:*@*', key3: 'val3 only in shared', key4: 'val4 only in shared'
-                all 'org.jfrog:*:1.?:*@*', key5: 'val5 on everything published', key6: 'val6 on everything published'
-                all 'org.jfrog:*:2.?:*@*', nokey1: 'noVal1'
-                foo 'org.jfrog:*:2.?:*@*', nokey1: 'noVal2'
-            }
+	        //This closure defines defaults for all 'artifactoryPublish' tasks of all projects the plugin is applied to
+	        publishConfigs ('a','b','foo')                                 //Optional list of configurations (names or objects) to publish.
+	                                                                       //The 'archives' configuration is used if it exists and no configuration is specified
+	        mavenDescriptor = '/home/froggy/projects/proj-a/fly-1.0.pom'   //Optional alternative path for a POM to be published (can be relative to project baseDir)
+	        ivyDescriptor = 'fly-1.0-ivy.xml'                              //Optional alternative path for an ivy file to be published (can be relative to project baseDir)
+	        properties = ['qa.level': 'basic', 'q.os': 'win32, deb, osx']  //Optional map of properties to attach to all published artifacts
+	        /*
+	        The properties closure in the "defaults" task uses the following syntax:
+	        properties {
+	            configuration 'group:module:version:classifier@type', key1:'value1', key2:'value2', ...
+	        }
+	        configuration: A configuration that is a valid name of a configuration of the project. You can use all to apply the properties to all configurations.
+	        group:module:version:classifier@type: An artifact specification filter for matching the artifacts to which properties should be attached. The filter may contain wildcards: * for all characters  
+	        or ? for a single character.
+	        key:'value': A list of key/value(s) properties that are attached to to the published artifacts matching the filter.
+	        */
+	        properties {                                                   //Optional closure to attach properties to artifacts based on a list of artifact patterns per project configuration
+	            foo '*:*:*:*@*', platform: 'linux', 'win64'                //The property platform=linux,win64 will be set on all artifacts in foo configuration
+	            archives 'org.jfrog:*:*:*@*', key1: 'val1'                 //The property key1=val1 will be set on all artifacts part of the archives configuration and with group org.jfrog
+	            all 'org.jfrog:shared:1.?:*@*', key2: 'val2', key3: 'val3' //The properties key2 and key3 will be set on all published artifacts (all configurations) with group:artifact:version
+	                                                                       //equal to org.jfrog:shared:1.?
+	        }
+	        publishBuildInfo = true   //Publish build-info to Artifactory (true by default)
+	        publishArtifacts = true   //Publish artifacts to Artifactory (true by default)
+	        publishPom = true         //Publish generated POM files to Artifactory (true by default)
+	        publishIvy = false        //Publish generated Ivy descriptor files to Artifactory (false by default)
         }
     }
     resolve {
