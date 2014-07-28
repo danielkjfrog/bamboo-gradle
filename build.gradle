@@ -81,17 +81,6 @@ configure(javaProjects()) {
     }
 }
 
-project('api') {
-    apply plugin: 'ivy-publish'
-
-    artifactoryPublish {
-        publications(publishing.publications.ivyJava)
-        properties {
-            simpleFile '**:**:**:*@*', simpleFile: 'only on settings file'
-        }
-    }
-}
-
 artifactoryPublish.skip = true
 
 artifactory {
