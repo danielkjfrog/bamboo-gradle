@@ -104,7 +104,7 @@ artifactory {
 	        //This closure defines defaults for all 'artifactoryPublish' tasks of all projects the plugin is applied to
 	        publishConfigs ('a','b','foo')                                 //Optional list of configurations (names or objects) to publish.
 	                                                                       //The 'archives' configuration is used if it exists and no configuration is specified
-	        mavenDescriptor = '/home/froggy/projects/proj-a/fly-1.0.pom'   //Optional alternative path for a POM to be published (can be relative to project baseDir)
+	        //mavenDescriptor = '/home/froggy/projects/proj-a/fly-1.0.pom'   //Optional alternative path for a POM to be published (can be relative to project baseDir)
 	        ivyDescriptor = 'fly-1.0-ivy.xml'                              //Optional alternative path for an ivy file to be published (can be relative to project baseDir)
 	        properties = ['qa.level': 'basic', 'q.os': 'win32, deb, osx']  //Optional map of properties to attach to all published artifacts
 	        /*
